@@ -21,10 +21,22 @@ st.markdown("你的AI学习伙伴，随时帮助你解答学习问题！")
 @st.cache_resource
 def init_groq_client():
     """初始化Groq API客户端"""
-    api_key = os.getenv("GROQ_API_KEY")
+    # 优先使用 Streamlit Secrets (用于 Streamlit Cloud)
+    # 如果不存在则使用环境变量 (用于本地开发)
+    api_key = None
+
+    # 尝试从 Streamlit secrets 获取
+    try:
+        api_key = st.secrets["GROQ_API_KEY"]
+    except (KeyError, FileNotFoundError):
+        # 如果 secrets 不存在，尝试从环境变量获取
+        api_key = os.getenv("GROQ_API_KEY")
+
     if not api_key:
-        st.error("❌ 请在 .env 文件中设置 GROQ_API_KEY")
+        st.error("❌ 请设置 GROQ_API_KEY")
+        st.info("💡 本地开发：在 .env 文件中设置\n\n💡 Streamlit Cloud：在 Settings → Secrets 中设置")
         st.stop()
+
     return Groq(api_key=api_key)
 
 client = init_groq_client()

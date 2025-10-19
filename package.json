@@ -1,0 +1,48 @@
+{
+  "name": "html5-games-test-suite",
+  "version": "1.0.0",
+  "description": "Comprehensive test suite for 9 HTML5 games",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest game-tests.js",
+    "test:watch": "jest game-tests.js --watch",
+    "test:coverage": "jest game-tests.js --coverage",
+    "test:verbose": "jest game-tests.js --verbose",
+    "serve": "python3 -m http.server 8000",
+    "open-tests": "open game-tests.html"
+  },
+  "keywords": [
+    "games",
+    "testing",
+    "html5",
+    "canvas",
+    "jest"
+  ],
+  "author": "Greyson",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "jsdom": "^22.0.0",
+    "@testing-library/dom": "^9.0.0",
+    "@testing-library/jest-dom": "^6.0.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!node_modules/**",
+      "!coverage/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 70,
+        "functions": 70,
+        "lines": 70,
+        "statements": 70
+      }
+    },
+    "testMatch": [
+      "**/*test*.js"
+    ]
+  }
+}

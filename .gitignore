@@ -27,6 +27,9 @@ ENV/
 .DS_Store
 Thumbs.db
 
+# Node modules
+node_modules/
+
 # 日志文件
 *.log
 
